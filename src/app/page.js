@@ -1,7 +1,22 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 
 export default function Home() {
+
+    useEffect(() => {
+    const test = async () => {
+      const { data, error } = await supabase
+        .from("actividades")
+        .select("*");
+
+      console.log("DATA:", data);
+      console.log("ERROR:", error);
+    };
+
+    test();
+  }, []);
+
 
   // 📚 Categorías
   const categorias = {
@@ -102,6 +117,9 @@ const [mensaje, setMensaje] = useState("");
   };
 
   const [cargando, setCargando] = useState(false);
+
+
+
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-200 via-blue-100 to-pink-100 text-gray-800 text-center p-5">
