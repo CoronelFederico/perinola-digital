@@ -179,7 +179,45 @@ const [mensaje, setMensaje] = useState("");
   const pruebas = actividades.filter(a => a.seccion === "pruebas");
   const souvenirs = actividades.filter(a => a.seccion === "souvenirs");
 
-  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
+
+
+
+// 📦 DATOS ORGANIZADOS (Rutas normalizadas)
+const carpetaData = {
+    "titulo": [
+      { "id": 101, "imagen": "/imagenes/caratula.jpeg", "descripcion": "Carátula del proyecto" }
+
+    ],
+    "resumen": [
+      { "id": 201, "imagen": "/imagenes/resumendelproyecto.jpeg", "descripcion": "Resumen escrito del proyecto - Página 1" },
+      { "id": 202, "imagen": "/imagenes/resumendelproyecto1.jpeg", "descripcion": "Resumen escrito del proyecto - Página 2" },
+      { "id": 203, "imagen": "/imagenes/6.jpeg", "descripcion": "El día 29/05/26 comenzamos a trabajar cn nuestro proyecto de feria de ciencias. Durante la primer clase, la docente explico las consignas y el objetivo del trabajo, decimos hacer el proyectos despúes de que hemos realizado una visita por el campo, visitando los animales que estan allí algunas herramientas de uso y también las plantas que se cosechan. Luego entre todos pensamos diferentes ideas y eligimos entre todos/as el tema a desarrollar. consversmaos sobre la imporatnce de buscar o investigar información confiable y trabajar en equipo." },
+      { "id": 205, "imagen": "/imagenes/8.jpeg", "descripcion": "En la fecha 5/6/26 continuamos trabajando realizando el juego y recolectando cartones para poder crear el dicho juego. Realizamos corrección, completamos los datos que faltaban y organizamos el material para la exposicion. También pensamos como presentaremos nuestro proyecto de una manera clara, ordenada e interesante para que las personas que visiten la feria puedan comprender facilmente nuestro proyecto." },
+      { "id": 206, "imagen": "/imagenes/9.jpeg", "descripcion": "En la clase 8/6/26 comenzamos con la investigación del tema seleccionado. Buscamos el material, leimos y analizamos los datos más importantes del campo y de inglés." },
+      { "id": 207, "imagen": "/imagenes/10.jpeg", "descripcion": "A medida que avanzamos, fuimos sleccionanando los contenidos que consideramos más relevante para incluir en nuestros proyecto. Además organizamos las tareas para que cada integrante pudiera colaborar de manera responsable y aportar sus ideas." }
+    ],
+    "pruebas": [
+      { "id": 301, "imagen": "/imagenes/pruebasytrabajos.jpeg", "descripcion": "Notas y apuntes de pruebas y trabajos" },
+      { "id": 302, "imagen": "/imagenes/herramientas.jpeg", "descripcion": "Lámina didáctica de herramientas de huerta" },
+      { "id": 303, "imagen": "/imagenes/vegetals.jpeg", "descripcion": "Ficha técnica de cultivos y hortalizas" },
+      { "id": 304, "imagen": "/imagenes/animals.jpeg", "descripcion": "Apuntes de animales de granja y observaciones" }
+    ],
+    "souvenirs": [
+      { "id": 401, "imagen": "/imagenes/souvenirs.jpeg", "descripcion": "Registro final del proceso y conclusiones" }
+    ]
+  };
+
+  
+
+  // 📋 SECCIONES QUE SE VAN A RENDERIZAR EN LA PÁGINA
+  const secciones = [
+    { nombre: "Título del proyecto", data: carpetaData.titulo },
+    { nombre: "Resumen del proyecto", data: carpetaData.resumen },
+    { nombre: "Pruebas y trabajos", data: carpetaData.pruebas },
+    { nombre: "Proceso de souvenirs", data: carpetaData.souvenirs },
+  ];
+
+
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-200 via-blue-100 to-pink-100 text-gray-800 text-center p-5">
@@ -273,42 +311,50 @@ const [mensaje, setMensaje] = useState("");
       )}
 
 
-{/* 📘 CARPETA DE CAMPO */}
-<div className="mt-16">
-  <h1 className="text-3xl font-bold text-center mb-10">
-    📘 Carpeta de Campo
-  </h1>
+<div className="mt-16 max-w-6xl mx-auto px-4">
+      <h1 className="text-4xl font-extrabold text-center mb-12 text-gray-900">
+        📘 Carpeta de Campo
+      </h1>
 
-  {[
-    { titulo: "Título del proyecto", data: titulo },
-    { titulo: "Resumen del proyecto", data: resumen },
-    { titulo: "Pruebas y trabajos", data: pruebas },
-    { titulo: "Proceso de souvenirs", data: souvenirs },
-  ].map((sec, i) => (
-    <div key={i} className="mb-10">
-      <h2 className="w-full h-32 object-cover rounded mb-2">
-        
-        {sec.titulo}
-        
-      </h2>
+      {secciones.map((sec, i) => (
+        <div key={i} className="mb-14">
+          {/* Nombre de la sección */}
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-2 border-gray-200">
+            {sec.nombre} 
+            <span className="text-sm font-normal text-gray-500 ml-2">({sec.data.length} elementos)</span>
+          </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {sec.data.map((act) => (
-          <div
-            key={act.id}
-            className="bg-white p-3 rounded-xl shadow"
-          >
-            <img src={act.imagen} className="rounded mb-2" />
-            <p className="text-gray-700 text-sm">
-              {act.descripcion}
-            </p>
+          {/* Grilla automática de 1 columna en celular, 2 en tablets y 3 en monitores */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {sec.data.map((act) => (
+              <div
+                key={act.id}
+                className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300"
+              >
+                {/* Contenedor de la imagen con tamaño fijo para que no se deforme la grilla */}
+                <div className="w-full h-56 bg-gray-100">
+                  <img 
+                    src={act.imagen} 
+                    alt={act.descripcion} 
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    // Esta línea pone una imagen gris si la ruta falla:
+                    onError={(e) => { e.target.src = "https://via.placeholder.com/400x300?text=Imagen+no+encontrada"; }}
+                  />
+                </div>
+                
+                {/* Texto de la tarjeta */}
+                <div className="p-4">
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    {act.descripcion}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
-  ))}
-</div>
-
     </main>
 
     
