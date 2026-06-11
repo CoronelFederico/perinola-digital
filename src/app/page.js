@@ -189,27 +189,27 @@ const cerrarModal = () => setImagenExpandida(null);
 // 📦 DATOS ORGANIZADOS (Rutas normalizadas)
 const carpetaData = {
     "titulo": [
-      { "id": 101, "imagen": "/imagenes/caratula.jpeg", "descripcion": "Carátula del proyecto" }
-
+      { "id": 101, "imagen": "/imagenes/caratula.jpeg", "descripcion": "Portada oficial: Proyecto de Feria de Ciencias" }
     ],
     "resumen": [
-      { "id": 201, "imagen": "/imagenes/resumendelproyecto.jpeg", "descripcion": "Resumen escrito del proyecto - Página 1" },
-      { "id": 202, "imagen": "/imagenes/resumendelproyecto1.jpeg", "descripcion": "Resumen escrito del proyecto - Página 2" },
-      { "id": 203, "imagen": "/imagenes/6.jpeg", "descripcion": "El día 29/05/26 comenzamos a trabajar cn nuestro proyecto de feria de ciencias. Durante la primer clase, la docente explico las consignas y el objetivo del trabajo, decimos hacer el proyectos despúes de que hemos realizado una visita por el campo, visitando los animales que estan allí algunas herramientas de uso y también las plantas que se cosechan. Luego entre todos pensamos diferentes ideas y eligimos entre todos/as el tema a desarrollar. consversmaos sobre la imporatnce de buscar o investigar información confiable y trabajar en equipo." },
-      { "id": 205, "imagen": "/imagenes/8.jpeg", "descripcion": "En la fecha 5/6/26 continuamos trabajando realizando el juego y recolectando cartones para poder crear el dicho juego. Realizamos corrección, completamos los datos que faltaban y organizamos el material para la exposicion. También pensamos como presentaremos nuestro proyecto de una manera clara, ordenada e interesante para que las personas que visiten la feria puedan comprender facilmente nuestro proyecto." },
-      { "id": 206, "imagen": "/imagenes/9.jpeg", "descripcion": "En la clase 8/6/26 comenzamos con la investigación del tema seleccionado. Buscamos el material, leimos y analizamos los datos más importantes del campo y de inglés." },
-      { "id": 207, "imagen": "/imagenes/10.jpeg", "descripcion": "A medida que avanzamos, fuimos sleccionanando los contenidos que consideramos más relevante para incluir en nuestros proyecto. Además organizamos las tareas para que cada integrante pudiera colaborar de manera responsable y aportar sus ideas." }
+      { "id": 201, "imagen": "/imagenes/resumendelproyecto.jpeg", "descripcion": "Documentación: Resumen del proyecto (Página 1)" },
+      { "id": 202, "imagen": "/imagenes/resumendelproyecto1.jpeg", "descripcion": "Documentación: Resumen del proyecto (Página 2)" },
+      { "id": 203, "imagen": "/imagenes/6.jpeg", "descripcion": "29/05/26: Inicio del proyecto tras la visita al campo. Definición de objetivos, selección grupal del tema basado en la observación de animales y cultivos, y debate sobre la importancia de la investigación confiable." },
+      { "id": 205, "imagen": "/imagenes/8.jpeg", "descripcion": "05/06/26: Desarrollo técnico del juego didáctico mediante el reciclaje de cartón. Fase de corrección de datos, organización de materiales y diseño de la estrategia de exposición para la feria." },
+      { "id": 206, "imagen": "/imagenes/9.jpeg", "descripcion": "08/06/26: Etapa de investigación profunda. Análisis y selección de datos clave integrando conocimientos de Ciencias Agrarias e Inglés." },
+      { "id": 207, "imagen": "/imagenes/10.jpeg", "descripcion": "Finalización de la curaduría de contenidos y asignación de roles. Organización colaborativa para asegurar que cada integrante aporte de manera responsable al resultado final." }
     ],
     "pruebas": [
-      { "id": 301, "imagen": "/imagenes/pruebasytrabajos.jpeg", "descripcion": "Notas y apuntes de pruebas y trabajos" },
-      { "id": 302, "imagen": "/imagenes/herramientas.jpeg", "descripcion": "Lámina didáctica de herramientas de huerta" },
-      { "id": 303, "imagen": "/imagenes/vegetals.jpeg", "descripcion": "Ficha técnica de cultivos y hortalizas" },
-      { "id": 304, "imagen": "/imagenes/animals.jpeg", "descripcion": "Apuntes de animales de granja y observaciones" }
+      { "id": 301, "imagen": "/imagenes/pruebasytrabajos.jpeg", "descripcion": "Archivo de evidencias: Apuntes, borradores y evaluaciones del proceso" },
+      { "id": 302, "imagen": "/imagenes/herramientas.jpeg", "descripcion": "Recurso visual: Glosario ilustrado de herramientas de huerta" },
+      { "id": 303, "imagen": "/imagenes/vegetals.jpeg", "descripcion": "Clasificación botánica: Fichas técnicas de hortalizas y cultivos" },
+      { "id": 304, "imagen": "/imagenes/animals.jpeg", "descripcion": "Estudio de campo: Registro de observaciones sobre animales de granja" }
     ],
     "souvenirs": [
-      { "id": 401, "imagen": "/imagenes/souvenirs.jpeg", "descripcion": "Registro final del proceso y conclusiones" }
+      { "id": 401, "imagen": "/imagenes/souvenirs.jpeg", "descripcion": "Cierre del proyecto: Conclusiones finales y entrega de recordatorios" }
     ]
   };
+  
 
   
 
@@ -226,7 +226,14 @@ const carpetaData = {
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-200 via-blue-100 to-pink-100 text-gray-800 text-center p-5">
 
-      <h1 className="text-3xl mb-5">🎲 Perinola Inglés</h1>
+<div className="flex flex-col items-center justify-center gap-3">
+  <img 
+    src="/imagenes/vaquita.png" 
+    alt="Vaquita" 
+    className="w-24 h-24 object-contain" 
+  />
+  <h1 className="text-3xl mb-5">🎲 Perinola Inglés 🎲</h1>
+</div>
 
 <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl inline-block mt-5">
 
