@@ -179,7 +179,7 @@ const [mensaje, setMensaje] = useState("");
   const pruebas = actividades.filter(a => a.seccion === "pruebas");
   const souvenirs = actividades.filter(a => a.seccion === "souvenirs");
 
-  
+  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-200 via-blue-100 to-pink-100 text-gray-800 text-center p-5">
@@ -286,8 +286,11 @@ const [mensaje, setMensaje] = useState("");
     { titulo: "Proceso de souvenirs", data: souvenirs },
   ].map((sec, i) => (
     <div key={i} className="mb-10">
-      <h2 className="text-2xl font-semibold mb-4">
+      <h2 className="text-2xl font-semibold mb-4"
+      className="w-full h-32 object-cover rounded mb-2">
+        
         {sec.titulo}
+        
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
