@@ -286,8 +286,7 @@ const [mensaje, setMensaje] = useState("");
     { titulo: "Proceso de souvenirs", data: souvenirs },
   ].map((sec, i) => (
     <div key={i} className="mb-10">
-      <h2 className="text-2xl font-semibold mb-4"
-      className="w-full h-32 object-cover rounded mb-2">
+      <h2 className="w-full h-32 object-cover rounded mb-2">
         
         {sec.titulo}
         
