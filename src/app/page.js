@@ -179,7 +179,11 @@ const [mensaje, setMensaje] = useState("");
   const pruebas = actividades.filter(a => a.seccion === "pruebas");
   const souvenirs = actividades.filter(a => a.seccion === "souvenirs");
 
+// Agrega este estado junto a los demás (puedes ponerlo debajo de 'actividades')
+const [imagenExpandida, setImagenExpandida] = useState(null);
 
+// Función para cerrar el modal
+const cerrarModal = () => setImagenExpandida(null);
 
 
 // 📦 DATOS ORGANIZADOS (Rutas normalizadas)
@@ -336,10 +340,10 @@ const carpetaData = {
                   <img 
                     src={act.imagen} 
                     alt={act.descripcion} 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform" 
                     loading="lazy"
-                    // Esta línea pone una imagen gris si la ruta falla:
-                    onError={(e) => { e.target.src = "https://via.placeholder.com/400x300?text=Imagen+no+encontrada"; }}
+                    onClick={() => setImagenExpandida(act)} // <--- Esto activa el holder
+                    onError={(e) => { e.target.src = "https://via.placeholder.com/400x300?text=Error+en+ruta"; }}
                   />
                 </div>
                 
@@ -355,6 +359,41 @@ const carpetaData = {
         </div>
       ))}
     </div>
+
+
+
+{/* 🖼️ HOLDER / MODAL DE IMAGEN */}
+{imagenExpandida && (
+  <div 
+    className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-in fade-in duration-300"
+    onClick={cerrarModal} // Cierra al hacer clic afuera
+  >
+    <div className="relative max-w-4xl w-full flex flex-col items-center">
+      {/* Botón de cerrar */}
+      <button 
+        className="absolute -top-12 right-0 text-white text-4xl font-bold hover:text-gray-300"
+        onClick={cerrarModal}
+      >
+        ×
+      </button>
+
+      {/* Imagen en grande */}
+      <img 
+        src={imagenExpandida.imagen} 
+        alt={imagenExpandida.descripcion} 
+        className="max-h-[80vh] rounded-lg shadow-2xl object-contain"
+      />
+
+      {/* Descripción abajo */}
+      <div className="mt-4 bg-white/20 p-4 rounded-xl backdrop-blur-md w-full text-center">
+        <p className="text-white text-lg font-medium">
+          {imagenExpandida.descripcion}
+        </p>
+      </div>
+    </div>
+  </div>
+)}
+
     </main>
 
     
