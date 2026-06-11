@@ -19,23 +19,47 @@ export default function Home() {
 
 
   // 📚 Categorías
-  const categorias = {
-    animales: [
-      { en: "dog", es: "perro" },
-      { en: "cat", es: "gato" },
-      { en: "cow", es: "vaca" }
-    ],
-    colores: [
-      { en: "red", es: "rojo" },
-      { en: "blue", es: "azul" },
-      { en: "green", es: "verde" }
-    ],
-    numeros: [
-      { en: "one", es: "uno" },
-      { en: "two", es: "dos" },
-      { en: "three", es: "tres" }
-    ]
-  };
+const categorias = {
+  "Herramientas de jardín": [
+    { en: "apron", es: "delantal" },
+    { en: "ax", es: "hacha" },
+    { en: "bucket", es: "balde" },
+    { en: "boots", es: "botas" },
+    { en: "watering can", es: "regadera" },
+    { en: "gardening gloves", es: "guantes de jardinería" },
+    { en: "garden fork", es: "horquilla de jardín" },
+    { en: "ladder", es: "escalera" },
+    { en: "shovel", es: "pala" },
+    { en: "wheelbarrow", es: "carretilla" },
+    { en: "flower pot", es: "maceta" }
+  ],
+
+  "Vegetales": [
+    { en: "cabbage", es: "repollo" },
+    { en: "spinach", es: "espinaca" },
+    { en: "cucumber", es: "pepino" },
+    { en: "bell pepper", es: "pimiento" },
+    { en: "peas", es: "arvejas" },
+    { en: "watercress", es: "berro" },
+    { en: "artichoke", es: "alcachofa" },
+    { en: "zucchini", es: "zapallito" }
+  ],
+
+  "Animales de granja": [
+    { en: "cow", es: "vaca" },
+    { en: "goat", es: "cabra" },
+    { en: "donkey", es: "burro" },
+    { en: "horse", es: "caballo" },
+    { en: "sheep", es: "oveja" },
+    { en: "pig", es: "cerdo" },
+    { en: "bull", es: "toro" },
+    { en: "rabbit", es: "conejo" },
+    { en: "duck", es: "pato" },
+    { en: "turkey", es: "pavo" },
+    { en: "goose", es: "ganso" },
+    { en: "rooster", es: "gallo" }
+  ]
+};
 
   // 🎮 Estados
   const [categoriaActual, setCategoriaActual] = useState("");
@@ -50,6 +74,7 @@ export default function Home() {
   const [rondasP1, setRondasP1] = useState(0);
   const [rondasP2, setRondasP2] = useState(0);
   const [ganador, setGanador] = useState(null);
+  
 
  const girar = () => {
   if (ganador) return;
@@ -119,7 +144,42 @@ const [mensaje, setMensaje] = useState("");
   const [cargando, setCargando] = useState(false);
 
 
+  const [actividades, setActividades] = useState([]);
 
+  useEffect(() => {
+    const cargar = async () => {
+      const { data } = await supabase
+        .from("actividades")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (data) setActividades(data);
+    };
+
+    cargar();
+  }, []);
+
+
+
+  useEffect(() => {
+    const cargar = async () => {
+      const { data } = await supabase
+        .from("actividades")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (data) setActividades(data);
+    };
+
+    cargar();
+  }, []);
+
+  const titulo = actividades.filter(a => a.seccion === "titulo");
+  const resumen = actividades.filter(a => a.seccion === "resumen");
+  const pruebas = actividades.filter(a => a.seccion === "pruebas");
+  const souvenirs = actividades.filter(a => a.seccion === "souvenirs");
+
+  
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-200 via-blue-100 to-pink-100 text-gray-800 text-center p-5">
@@ -212,6 +272,46 @@ const [mensaje, setMensaje] = useState("");
         </button>
       )}
 
+
+{/* 📘 CARPETA DE CAMPO */}
+<div className="mt-16">
+  <h1 className="text-3xl font-bold text-center mb-10">
+    📘 Carpeta de Campo
+  </h1>
+
+  {[
+    { titulo: "Título del proyecto", data: titulo },
+    { titulo: "Resumen del proyecto", data: resumen },
+    { titulo: "Pruebas y trabajos", data: pruebas },
+    { titulo: "Proceso de souvenirs", data: souvenirs },
+  ].map((sec, i) => (
+    <div key={i} className="mb-10">
+      <h2 className="text-2xl font-semibold mb-4">
+        {sec.titulo}
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {sec.data.map((act) => (
+          <div
+            key={act.id}
+            className="bg-white p-3 rounded-xl shadow"
+          >
+            <img src={act.imagen} className="rounded mb-2" />
+            <p className="text-gray-700 text-sm">
+              {act.descripcion}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
+
     </main>
+
+    
   );
+
+  
 }
+
